@@ -1,0 +1,172 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Topbar -->
+<div class="topbar">
+
+    <div>
+        <h2>Dashboard</h2>
+        <small class="text-muted">
+            Selamat datang di Sistem Informasi Perpustakaan Kampus
+        </small>
+    </div>
+
+    <div class="user">
+        <i class="bi bi-person-circle"></i>
+        Admin
+    </div>
+
+</div>
+
+<!-- Statistik -->
+<div class="row g-4">
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-book-half"></i>
+
+            <h5>Total Buku</h5>
+
+            <h2>150</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-people-fill"></i>
+
+            <h5>Total Anggota</h5>
+
+            <h2>85</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-journal-check"></i>
+
+            <h5>Buku Dipinjam</h5>
+
+            <h2>20</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <h5>Buku Dikembalikan</h5>
+
+            <h2>130</h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Tabel -->
+<div class="table-container">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h4>Data Peminjaman Terbaru</h4>
+
+        <button class="btn btn-success">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Tambah Peminjaman
+
+        </button>
+
+    </div>
+
+    <table class="table table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>No</th>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Judul Buku</th>
+                <th>Tanggal Pinjam</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>1</td>
+                <td>231001</td>
+                <td>Ahmad</td>
+                <td>Pemrograman Web</td>
+                <td>20 Juli 2026</td>
+                <td>
+                    <span class="badge bg-warning text-dark">
+                        Dipinjam
+                    </span>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>2</td>
+                <td>231002</td>
+                <td>Siti</td>
+                <td>Basis Data</td>
+                <td>18 Juli 2026</td>
+                <td>
+                    <span class="badge bg-success">
+                        Dikembalikan
+                    </span>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>3</td>
+                <td>231003</td>
+                <td>Budi</td>
+                <td>Jaringan Komputer</td>
+                <td>15 Juli 2026</td>
+                <td>
+                    <span class="badge bg-warning text-dark">
+                        Dipinjam
+                    </span>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
