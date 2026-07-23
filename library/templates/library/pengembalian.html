@@ -1,0 +1,87 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Pengembalian
+{% endblock %}
+
+
+{% block content %}
+
+<div class="topbar">
+    <h2>Pengembalian Buku</h2>
+</div>
+
+
+<div class="card">
+
+    <h4>Daftar Buku Yang Sedang Dipinjam</h4>
+
+    <table class="table table-bordered mt-3">
+
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Anggota</th>
+                <th>Judul Buku</th>
+                <th>Tanggal Pinjam</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+
+
+<tbody>
+
+{% for p in peminjaman %}
+
+<tr>
+
+<td>{{ forloop.counter }}</td>
+
+<td>
+    {{ p.anggota.nama }}
+</td>
+
+<td>
+    {{ p.buku.judul }}
+</td>
+
+<td>
+    {{ p.tanggal_pinjam }}
+</td>
+
+<td>
+    <span class="badge bg-warning">
+        {{ p.status }}
+    </span>
+</td>
+
+<td>
+    <a href="{% url 'tambah_pengembalian' p.id %}" 
+       class="btn btn-success btn-sm">
+       Kembalikan
+    </a>
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="6" class="text-center">
+Tidak ada buku yang sedang dipinjam
+</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+
+    </table>
+
+
+</div>
+
+
+{% endblock %}

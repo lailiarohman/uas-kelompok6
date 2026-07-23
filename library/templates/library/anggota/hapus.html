@@ -1,0 +1,40 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Hapus Anggota
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+        <h4>Hapus Data Anggota</h4>
+    </div>
+
+    <div class="card-body">
+
+        <p>
+            Apakah Anda yakin ingin menghapus anggota
+            <strong>{{ anggota.nama }}</strong>?
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button class="btn btn-danger">
+                Ya, Hapus
+            </button>
+
+            <a href="{% url 'anggota' %}" class="btn btn-secondary">
+                Batal
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

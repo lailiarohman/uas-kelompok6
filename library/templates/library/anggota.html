@@ -1,0 +1,84 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Data Anggota
+{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div>
+        <h2>Data Anggota</h2>
+        <small class="text-muted">
+            Kelola seluruh data anggota perpustakaan
+        </small>
+    </div>
+
+    <a href="#" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i>
+        Tambah Anggota
+    </a>
+
+</div>
+
+<div class="table-container">
+
+    <table class="table table-hover">
+
+        <thead>
+
+            <tr>
+                <th>No</th>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>No HP</th>
+                <th>Aksi</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>1</td>
+                <td>2310001</td>
+                <td>Faidatus Solehah</td>
+                <td>Teknik Informatika</td>
+                <td>081234567890</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>2310002</td>
+                <td>Ahmad</td>
+                <td>Sistem Informasi</td>
+                <td>081298765432</td>
+                <td>
+                    <button class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

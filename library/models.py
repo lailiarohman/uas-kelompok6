@@ -40,3 +40,24 @@ class Peminjaman(models.Model):
 
     def __str__(self):
         return f"{self.anggota.nama} - {self.buku.judul}"
+    
+class Pengembalian(models.Model):
+    peminjaman = models.OneToOneField(
+        Peminjaman,
+        on_delete=models.CASCADE
+    )
+
+    tanggal_pengembalian = models.DateField()
+
+    kondisi_buku = models.CharField(
+        max_length=20,
+        choices=[
+            ('Baik', 'Baik'),
+            ('Rusak', 'Rusak'),
+        ]
+    )
+
+    denda = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.peminjaman.anggota.nama

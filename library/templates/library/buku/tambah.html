@@ -1,0 +1,86 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Tambah Buku
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+                <i class="bi bi-plus-circle"></i>
+                Tambah Buku
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label>Kode Buku</label>
+                        {{ form.kode_buku }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Judul Buku</label>
+                        {{ form.judul }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Penulis</label>
+                        {{ form.penulis }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Penerbit</label>
+                        {{ form.penerbit }}
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Tahun Terbit</label>
+                        {{ form.tahun_terbit }}
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Kategori</label>
+                        {{ form.kategori }}
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Stok</label>
+                        {{ form.stok }}
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i>
+                    Simpan
+                </button>
+
+                <a href="{% url 'buku' %}" class="btn btn-secondary">
+                    Kembali
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Edit Buku
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="fw-bold">Edit Buku</h2>
+        <p class="text-muted mb-0">
+            Perbarui data buku perpustakaan
+        </p>
+    </div>
+
+</div>
+
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-save"></i>
+                Simpan Perubahan
+            </button>
+
+            <a href="{% url 'buku' %}" class="btn btn-secondary">
+                Kembali
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -32,7 +32,7 @@
 
             <h5>Total Buku</h5>
 
-            <h2>150</h2>
+            <h2>{{ total_buku }}</h2>
 
         </div>
 
@@ -46,7 +46,7 @@
 
             <h5>Total Anggota</h5>
 
-            <h2>85</h2>
+            <h2>{{ total_anggota }}</h2>
 
         </div>
 
@@ -60,7 +60,7 @@
 
             <h5>Buku Dipinjam</h5>
 
-            <h2>20</h2>
+            <h2>{{ buku_dipinjam }}</h2>
 
         </div>
 
@@ -74,7 +74,7 @@
 
             <h5>Buku Dikembalikan</h5>
 
-            <h2>130</h2>
+            <h2>{{ buku_dikembalikan }}</h2>
 
         </div>
 
@@ -87,17 +87,14 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
 
-        <h4>Data Peminjaman Terbaru</h4>
+    <h4>Data Peminjaman Terbaru</h4>
 
-        <button class="btn btn-success">
+    <a href="{% url 'tambah_peminjaman' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i>
+        Tambah Peminjaman
+    </a>
 
-            <i class="bi bi-plus-circle"></i>
-
-            Tambah Peminjaman
-
-        </button>
-
-    </div>
+</div>
 
     <table class="table table-hover">
 
@@ -116,54 +113,57 @@
 
         </thead>
 
-        <tbody>
+<tbody>
 
-            <tr>
+{% for item in peminjaman_terbaru %}
 
-                <td>1</td>
-                <td>231001</td>
-                <td>Ahmad</td>
-                <td>Pemrograman Web</td>
-                <td>20 Juli 2026</td>
-                <td>
-                    <span class="badge bg-warning text-dark">
-                        Dipinjam
-                    </span>
-                </td>
+<tr>
 
-            </tr>
+    <td>{{ forloop.counter }}</td>
 
-            <tr>
+    <td>{{ item.anggota.nim }}</td>
 
-                <td>2</td>
-                <td>231002</td>
-                <td>Siti</td>
-                <td>Basis Data</td>
-                <td>18 Juli 2026</td>
-                <td>
-                    <span class="badge bg-success">
-                        Dikembalikan
-                    </span>
-                </td>
+    <td>{{ item.anggota.nama }}</td>
 
-            </tr>
+    <td>{{ item.buku.judul }}</td>
 
-            <tr>
+    <td>{{ item.tanggal_pinjam }}</td>
 
-                <td>3</td>
-                <td>231003</td>
-                <td>Budi</td>
-                <td>Jaringan Komputer</td>
-                <td>15 Juli 2026</td>
-                <td>
-                    <span class="badge bg-warning text-dark">
-                        Dipinjam
-                    </span>
-                </td>
+    <td>
 
-            </tr>
+        {% if item.status == "Dipinjam" %}
 
-        </tbody>
+            <span class="badge bg-warning text-dark">
+                Dipinjam
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-success">
+                Dikembalikan
+            </span>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+
+{% empty %}
+
+<tr>
+
+    <td colspan="6" class="text-center text-muted">
+        Belum ada data peminjaman.
+    </td>
+
+</tr>
+
+
+{% endfor %}
+
+</tbody>
 
     </table>
 

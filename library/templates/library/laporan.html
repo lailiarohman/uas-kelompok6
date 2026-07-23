@@ -1,0 +1,81 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Laporan{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+    <h2>Laporan Perpustakaan</h2>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Jumlah Buku</h5>
+            <h2>{{ jumlah_buku }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Jumlah Anggota</h5>
+            <h2>{{ jumlah_anggota }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Peminjaman</h5>
+            <h2>{{ jumlah_peminjaman }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Pengembalian</h5>
+            <h2>{{ jumlah_pengembalian }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<div class="card-header">
+    <h4>Riwayat Peminjaman</h4>
+</div>
+
+<div class="card-body">
+
+<table class="table table-bordered">
+
+<tr>
+    <th>No</th>
+    <th>Anggota</th>
+    <th>Buku</th>
+    <th>Tanggal Pinjam</th>
+    <th>Status</th>
+</tr>
+
+{% for p in data_peminjaman %}
+
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ p.anggota.nama }}</td>
+    <td>{{ p.buku.judul }}</td>
+    <td>{{ p.tanggal_pinjam }}</td>
+    <td>{{ p.status }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}

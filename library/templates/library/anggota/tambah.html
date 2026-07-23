@@ -1,0 +1,81 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Tambah Anggota
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+                <i class="bi bi-person-plus"></i>
+                Tambah Anggota
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label>NIM</label>
+                        {{ form.nim }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Nama</label>
+                        {{ form.nama }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Program Studi</label>
+                        {{ form.prodi }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Fakultas</label>
+                        {{ form.fakultas }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>No HP</label>
+                        {{ form.no_hp }}
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label>Alamat</label>
+                        {{ form.alamat }}
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i>
+                    Simpan
+                </button>
+
+                <a href="{% url 'anggota' %}" class="btn btn-secondary">
+                    Kembali
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

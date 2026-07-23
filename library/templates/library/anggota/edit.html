@@ -1,0 +1,51 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+Edit Anggota
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-warning">
+
+        <h4>
+
+            <i class="bi bi-pencil-square"></i>
+
+            Edit Data Anggota
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-warning">
+
+                <i class="bi bi-save"></i>
+
+                Update
+
+            </button>
+
+            <a href="{% url 'anggota' %}" class="btn btn-secondary">
+
+                Kembali
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
