@@ -7,6 +7,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard-anggota/', views.dashboard_anggota, name='dashboard_anggota'),
+    path('dashboard-kepala/', views.dashboard_kepala, name='dashboard_kepala'),
 
     # CRUD Buku
     path('buku/', views.buku, name='buku'),
@@ -28,14 +30,16 @@ urlpatterns = [
 
     # CRUD Pengembalian
     path('pengembalian/', views.pengembalian, name='pengembalian'),
-    path('pengembalian/tambah/', views.tambah_pengembalian, name='tambah_pengembalian'),
+    path('pengembalian/tambah/<int:id>/',views.tambah_pengembalian,name='tambah_pengembalian'),
     path('pengembalian/edit/<int:id>/', views.edit_pengembalian, name='edit_pengembalian'),
     path('pengembalian/hapus/<int:id>/', views.hapus_pengembalian, name='hapus_pengembalian'),
-    
-    # CRUD Pengembalian
-    path('pengembalian/', views.pengembalian, name='pengembalian'),
-    path('pengembalian/tambah/<int:id>/',views.tambah_pengembalian,name='tambah_pengembalian'),
-    
+      
     # Laporan
     path('laporan/', views.laporan, name='laporan'),
+    
+    path('katalog/', views.katalog_buku, name='katalog_buku'),
+    
+    path('riwayat-peminjaman/',views.riwayat_peminjaman,name='riwayat_peminjaman'),
+    
+    path('profil/',views.profil_anggota,name='profil_anggota'),
 ]

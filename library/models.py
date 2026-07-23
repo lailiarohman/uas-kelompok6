@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Buku(models.Model):
     kode_buku = models.CharField(max_length=20, unique=True)
@@ -14,16 +14,22 @@ class Buku(models.Model):
         return self.judul
 
 
+from django.contrib.auth.models import User
+
 class Anggota(models.Model):
-    nim = models.CharField(max_length=20, unique=True)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    nim = models.CharField(max_length=20)
     nama = models.CharField(max_length=100)
     prodi = models.CharField(max_length=100)
     fakultas = models.CharField(max_length=100)
-    no_hp = models.CharField(max_length=15)
+    no_hp = models.CharField(max_length=20)
     alamat = models.TextField()
-
-    def __str__(self):
-        return self.nama
 
 
 class Peminjaman(models.Model):

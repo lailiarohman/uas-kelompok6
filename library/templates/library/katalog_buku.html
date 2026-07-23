@@ -1,0 +1,73 @@
+{% extends 'library/base_anggota.html' %}
+
+{% block title %}
+Katalog Buku
+{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+    <h2>Katalog Buku</h2>
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>Daftar Buku Perpustakaan</h4>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-success">
+
+                <tr>
+                    <th>No</th>
+                    <th>Kode Buku</th>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Penerbit</th>
+                    <th>Tahun</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for buku in data_buku %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ buku.kode_buku }}</td>
+                    <td>{{ buku.judul }}</td>
+                    <td>{{ buku.penulis }}</td>
+                    <td>{{ buku.penerbit }}</td>
+                    <td>{{ buku.tahun_terbit }}</td>
+                    <td>{{ buku.kategori }}</td>
+                    <td>{{ buku.stok }}</td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="8" class="text-center">
+                        Belum ada data buku.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -13,12 +13,24 @@ def home(request):
 
 def login_view(request):
 
-    # Jika sudah login, langsung ke dashboard
+    # Jika sudah login
     if request.user.is_authenticated:
-        return redirect('dashboard')
+
+        if request.user.groups.filter(name='Admin').exists():
+            return redirect('dashboard')
+
+        elif request.user.groups.filter(name='Anggota').exists():
+            return redirect('dashboard_anggota')
+
+        elif request.user.groups.filter(name='Kepala').exists():
+            return redirect('dashboard_kepala')
+
+        else:
+            return redirect('dashboard')
 
     # Proses login
     if request.method == 'POST':
+
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -29,19 +41,33 @@ def login_view(request):
         )
 
         if user is not None:
+
             login(request, user)
-            return redirect('dashboard')
 
-        # Jika login gagal
-        return render(
-            request,
-            'library/login.html',
-            {
-                'error': 'Username atau Password salah!'
-            }
-        )
+            if user.groups.filter(name='Admin').exists():
+                return redirect('dashboard')
 
-    # Tampilkan halaman login
+            elif user.groups.filter(name='Anggota').exists():
+                return redirect('dashboard_anggota')
+
+            elif user.groups.filter(name='Kepala').exists():
+                return redirect('dashboard_kepala')
+
+            else:
+                messages.error(request, "Role pengguna belum diatur.")
+                logout(request)
+                return redirect('login')
+
+        else:
+
+            return render(
+                request,
+                'library/login.html',
+                {
+                    'error': 'Username atau Password salah!'
+                }
+            )
+
     return render(request, 'library/login.html')
 
 
@@ -75,6 +101,57 @@ def dashboard(request):
         'library/dashboard.html',
         context
     )
+    
+@login_required(login_url='login')
+def dashboard(request):
+
+    total_buku = Buku.objects.count()
+    total_anggota = Anggota.objects.count()
+
+    buku_dipinjam = Peminjaman.objects.filter(
+        status="Dipinjam"
+    ).count()
+
+    buku_dikembalikan = Peminjaman.objects.filter(
+        status="Dikembalikan"
+    ).count()
+
+    peminjaman_terbaru = Peminjaman.objects.all().order_by('-id')[:5]
+
+    context = {
+        'total_buku': total_buku,
+        'total_anggota': total_anggota,
+        'buku_dipinjam': buku_dipinjam,
+        'buku_dikembalikan': buku_dikembalikan,
+        'peminjaman_terbaru': peminjaman_terbaru,
+    }
+
+    return render(
+        request,
+        'library/dashboard.html',
+        context
+    )
+
+
+# ==========================
+# DASHBOARD ANGGOTA
+# ==========================
+@login_required(login_url='login')
+def dashboard_anggota(request):
+    return render(request, 'library/dashboard_anggota.html')
+
+
+# ==========================
+# DASHBOARD KEPALA
+# ==========================
+@login_required(login_url='login')
+def dashboard_kepala(request):
+    return render(request, 'library/dashboard_kepala.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 def logout_view(request):
@@ -543,3 +620,46 @@ def laporan(request):
     }
 
     return render(request, 'library/laporan.html', context)
+@login_required
+def katalog_buku(request):
+    data_buku = Buku.objects.all()
+
+    return render(
+        request,
+        'library/katalog_buku.html',
+        {
+            'data_buku': data_buku
+        }
+    )
+    
+@login_required
+def riwayat_peminjaman(request):
+
+    print("USER LOGIN:", request.user)
+
+    anggota = Anggota.objects.get(user=request.user)
+
+    data = Peminjaman.objects.filter(
+        anggota=anggota
+    )
+
+    return render(
+        request,
+        'library/riwayat_peminjaman.html',
+        {
+            'data': data
+        }
+    )
+    
+@login_required
+def profil_anggota(request):
+
+    anggota = Anggota.objects.get(user=request.user)
+
+    return render(
+        request,
+        'library/profil_anggota.html',
+        {
+            'anggota': anggota
+        }
+    )

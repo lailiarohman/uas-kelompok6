@@ -1,0 +1,57 @@
+{% extends 'library/base_anggota.html' %}
+
+{% block title %}Profil Anggota{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+    <h2>Profil Anggota</h2>
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>Informasi Profil</h4>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th width="200">NIM</th>
+                <td>{{ anggota.nim }}</td>
+            </tr>
+
+            <tr>
+                <th>Nama</th>
+                <td>{{ anggota.nama }}</td>
+            </tr>
+
+            <tr>
+                <th>Program Studi</th>
+                <td>{{ anggota.prodi }}</td>
+            </tr>
+
+            <tr>
+                <th>Fakultas</th>
+                <td>{{ anggota.fakultas }}</td>
+            </tr>
+
+            <tr>
+                <th>No HP</th>
+                <td>{{ anggota.no_hp }}</td>
+            </tr>
+
+            <tr>
+                <th>Alamat</th>
+                <td>{{ anggota.alamat }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

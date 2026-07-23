@@ -1,0 +1,75 @@
+{% extends 'library/base_anggota.html' %}
+
+{% block title %}
+Riwayat Peminjaman
+{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+    <h2>Riwayat Peminjaman</h2>
+</div>
+
+<div class="card">
+
+<div class="card-header">
+    <h4>Riwayat Peminjaman Saya</h4>
+</div>
+
+<div class="card-body">
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>Judul Buku</th>
+<th>Tanggal Pinjam</th>
+<th>Tanggal Kembali</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in data %}
+
+<tr>
+
+<td>{{ forloop.counter }}</td>
+
+<td>{{ item.buku.judul }}</td>
+
+<td>{{ item.tanggal_pinjam }}</td>
+
+<td>{{ item.tanggal_kembali }}</td>
+
+<td>{{ item.status }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5" class="text-center">
+Belum ada riwayat peminjaman.
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}
