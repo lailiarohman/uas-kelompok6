@@ -8,13 +8,26 @@ class Buku(models.Model):
     penerbit = models.CharField(max_length=100)
     tahun_terbit = models.PositiveIntegerField()
     kategori = models.CharField(max_length=100)
+
+    isbn = models.CharField(max_length=20, blank=True)
+
+    lokasi_rak = models.CharField(
+        max_length=50,
+        default="Rak A1"
+    )
+
+    kondisi = models.CharField(
+        max_length=20,
+        choices=[
+            ('Baik', 'Baik'),
+            ('Rusak', 'Rusak'),
+        ],
+        default='Baik'
+    )
+
     stok = models.PositiveIntegerField(default=0)
-
     def __str__(self):
-        return self.judul
-
-
-from django.contrib.auth.models import User
+        return f"{self.kode_buku} - {self.judul}"
 
 class Anggota(models.Model):
     user = models.OneToOneField(
@@ -30,6 +43,9 @@ class Anggota(models.Model):
     fakultas = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=20)
     alamat = models.TextField()
+
+    def __str__(self):
+        return f"{self.nama} ({self.nim})"
 
 
 class Peminjaman(models.Model):
@@ -67,3 +83,18 @@ class Pengembalian(models.Model):
 
     def __str__(self):
         return self.peminjaman.anggota.nama
+    
+class HistoriJabatan(models.Model):
+    nama_kepala = models.CharField(max_length=100)
+    jabatan = models.CharField(
+        max_length=100,
+        default="Kepala Perpustakaan"
+    )
+    tanggal_mulai = models.DateField()
+    tanggal_selesai = models.DateField(
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        return self.nama_kepala

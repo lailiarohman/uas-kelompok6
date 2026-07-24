@@ -47,9 +47,11 @@ Data Buku
                     <th>Penerbit</th>
                     <th>Tahun</th>
                     <th>Kategori</th>
+                    <th>ISBN</th>
+                    <th>Lokasi Rak</th>
+                    <th>Kondisi</th>
                     <th>Stok</th>
                     <th width="150">Aksi</th>
-
                 </tr>
 
             </thead>
@@ -67,8 +69,10 @@ Data Buku
                     <td>{{ item.penerbit }}</td>
                     <td>{{ item.tahun_terbit }}</td>
                     <td>{{ item.kategori }}</td>
+                    <td>{{ item.isbn }}</td>
+                    <td>{{ item.lokasi_rak }}</td>
+                    <td>{{ item.kondisi }}</td>
                     <td>{{ item.stok }}</td>
-
                     <td>
 
                         <a href="{% url 'edit_buku' item.id %}"
@@ -96,7 +100,7 @@ Data Buku
 
                 <tr>
 
-                    <td colspan="9" class="text-center text-muted">
+                    <td colspan="12" class="text-center text-muted">
 
                         Belum ada data buku.
 

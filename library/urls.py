@@ -42,4 +42,7 @@ urlpatterns = [
     path('riwayat-peminjaman/',views.riwayat_peminjaman,name='riwayat_peminjaman'),
     
     path('profil/',views.profil_anggota,name='profil_anggota'),
+ 
+    path('data-peminjaman-kepala/',views.data_peminjaman_kepala,name='data_peminjaman_kepala'),
+    path('histori-jabatan/', views.histori_jabatan, name='histori_jabatan'),
 ]

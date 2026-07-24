@@ -28,7 +28,7 @@
 
     <div class="sidebar">
 
-<h3 class="fw-bold">
+ <h3 class="fw-bold">
     <i class="bi bi-book-half"></i>
     SIMPEL
 </h3>
@@ -41,30 +41,25 @@
 
         <hr>
 
- <a href="{% url 'dashboard_anggota' %}">
-    <i class="bi bi-speedometer2"></i>
-    Dashboard
-</a>
+        <a href="{% url 'dashboard_kepala' %}">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
 
-<a href="{% url 'katalog_buku' %}">
-    <i class="bi bi-book"></i>
-    Katalog Buku
-</a>
+        <a href="{% url 'data_peminjaman_kepala' %}">
+            <i class="bi bi-book"></i>
+            Data Peminjaman
+        </a>
 
-<a href="{% url 'riwayat_peminjaman' %}">
-    <i class="bi bi-journal-text"></i>
-    Riwayat Peminjaman
-</a>
+        <a href="{% url 'histori_jabatan' %}">
+            <i class="bi bi-people"></i>
+            Histori Jabatan
+        </a>
 
-<a href="{% url 'profil_anggota' %}">
-    <i class="bi bi-person"></i>
-    Profil
-</a>
-
-<a href="{% url 'logout' %}">
-    <i class="bi bi-box-arrow-right"></i>
-    Logout
-</a>
+        <a href="{% url 'logout' %}">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
 
     </div>
 

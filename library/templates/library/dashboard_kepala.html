@@ -1,22 +1,165 @@
-{% extends 'library/base.html' %}
+{% extends 'library/base_kepala.html' %}
 
-{% block title %}
-Dashboard Kepala
-{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
+<!-- Topbar -->
 <div class="topbar">
-    <h2>Dashboard Kepala Perpustakaan</h2>
+
+    <div>
+        <h2>Dashboard Kepala Perpustakaan</h2>
+        <small class="text-muted">
+            Selamat datang di Dashboard Kepala Perpustakaan
+        </small>
+    </div>
+
+    <div class="user">
+        <i class="bi bi-person-circle"></i>
+        {{ request.user.username }}
+    </div>
 </div>
 
-<div class="card p-4">
+<!-- Statistik -->
+<div class="row g-4">
 
-    <h4>Selamat Datang</h4>
+    <div class="col-lg-3 col-md-6">
 
-    <p>
-        Anda login sebagai <b>Kepala Perpustakaan</b>.
-    </p>
+        <div class="card-box">
+
+            <i class="bi bi-book-half"></i>
+
+            <h5>Total Buku</h5>
+
+            <h2>{{ total_buku }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-people-fill"></i>
+
+            <h5>Total Anggota</h5>
+
+            <h2>{{ total_anggota }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-journal-check"></i>
+
+            <h5>Total Peminjaman</h5>
+
+            <h2>{{ total_peminjaman }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card-box">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <h5>Total Pengembalian</h5>
+
+            <h2>{{ total_pengembalian }}</h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Tabel -->
+<div class="table-container">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h4>Monitoring Peminjaman Terbaru</h4>
+
+</div>
+
+    <table class="table table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>No</th>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Judul Buku</th>
+                <th>Tanggal Pinjam</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+<tbody>
+
+{% for item in peminjaman_terbaru %}
+
+<tr>
+
+    <td>{{ forloop.counter }}</td>
+
+    <td>{{ item.anggota.nim }}</td>
+
+    <td>{{ item.anggota.nama }}</td>
+
+    <td>{{ item.buku.judul }}</td>
+
+    <td>{{ item.tanggal_pinjam }}</td>
+
+    <td>
+
+        {% if item.status == "Dipinjam" %}
+
+            <span class="badge bg-warning text-dark">
+                Dipinjam
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-success">
+                Dikembalikan
+            </span>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+
+{% empty %}
+
+<tr>
+
+    <td colspan="6" class="text-center text-muted">
+        Belum ada data peminjaman.
+    </td>
+
+</tr>
+
+
+{% endfor %}
+
+</tbody>
+
+    </table>
 
 </div>
 

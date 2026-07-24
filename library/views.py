@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 
-from .models import Buku, Anggota, Peminjaman, Pengembalian
+from .models import Buku, Anggota, Peminjaman, Pengembalian, HistoriJabatan
 from .forms import BukuForm, AnggotaForm, PeminjamanForm, PengembalianForm
 
 
@@ -144,9 +145,36 @@ def dashboard_anggota(request):
 # ==========================
 # DASHBOARD KEPALA
 # ==========================
-@login_required(login_url='login')
+@login_required
 def dashboard_kepala(request):
-    return render(request, 'library/dashboard_kepala.html')
+
+    if not request.user.groups.filter(name='Kepala').exists():
+        return redirect('login')
+
+    total_buku = Buku.objects.count()
+    total_anggota = Anggota.objects.count()
+    total_peminjaman = Peminjaman.objects.count()
+    total_pengembalian = Peminjaman.objects.filter(
+        status='Dikembalikan'
+    ).count()
+
+    peminjaman_terbaru = Peminjaman.objects.order_by(
+        '-tanggal_pinjam'
+    )[:5]
+
+    context = {
+        'total_buku': total_buku,
+        'total_anggota': total_anggota,
+        'total_peminjaman': total_peminjaman,
+        'total_pengembalian': total_pengembalian,
+        'peminjaman_terbaru': peminjaman_terbaru,
+    }
+
+    return render(
+        request,
+        'library/dashboard_kepala.html',
+        context
+    )
 
 
 def logout_view(request):
@@ -620,15 +648,27 @@ def laporan(request):
     }
 
     return render(request, 'library/laporan.html', context)
+
 @login_required
 def katalog_buku(request):
+
+    cari = request.GET.get('cari', '')
+
     data_buku = Buku.objects.all()
+
+    if cari:
+        data_buku = data_buku.filter(
+            Q(judul__icontains=cari) |
+            Q(penulis__icontains=cari) |
+            Q(kategori__icontains=cari)
+        )
 
     return render(
         request,
         'library/katalog_buku.html',
         {
-            'data_buku': data_buku
+            'data_buku': data_buku,
+            'cari': cari
         }
     )
     
@@ -663,3 +703,41 @@ def profil_anggota(request):
             'anggota': anggota
         }
     )
+    
+@login_required
+def data_peminjaman_kepala(request):
+    data = Peminjaman.objects.all()
+
+    return render(
+        request,
+        'library/data_peminjaman_kepala.html',
+        {'data': data}
+    )
+    
+@login_required
+def data_peminjaman_kepala(request):
+
+    data = Peminjaman.objects.select_related(
+        'anggota',
+        'buku'
+    ).all().order_by('-tanggal_pinjam')
+
+    return render(
+        request,
+        'library/data_peminjaman_kepala.html',
+        {
+            'data': data
+        }
+    )
+
+
+@login_required
+def histori_jabatan(request):
+    data = HistoriJabatan.objects.all()
+
+    return render(
+        request,
+        'library/histori_jabatan.html',
+        {'data': data}
+    )
+    

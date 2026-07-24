@@ -1,0 +1,115 @@
+{% extends 'library/base_kepala.html' %}
+
+{% block title %}Histori Jabatan{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div>
+        <h2>Histori Jabatan</h2>
+
+        <small class="text-muted">
+            Riwayat Kepala Perpustakaan
+        </small>
+    </div>
+
+    <div class="user">
+        <i class="bi bi-person-circle"></i>
+        {{ request.user.username }}
+    </div>
+
+</div>
+
+<div class="table-container">
+
+    <h4 class="mb-3">
+        Data Histori Jabatan
+    </h4>
+
+    <table class="table table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>No</th>
+                <th>Nama Kepala</th>
+                <th>Jabatan</th>
+                <th>Tanggal Mulai</th>
+                <th>Tanggal Selesai</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for item in data %}
+
+        <tr>
+
+            <td>{{ forloop.counter }}</td>
+
+            <td>{{ item.nama_kepala }}</td>
+
+            <td>{{ item.jabatan }}</td>
+
+            <td>{{ item.tanggal_mulai }}</td>
+
+            <td>
+
+                {% if item.tanggal_selesai %}
+
+                    {{ item.tanggal_selesai }}
+
+                {% else %}
+
+                    -
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if item.tanggal_selesai %}
+
+                    <span class="badge bg-secondary">
+                        Selesai
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-success">
+                        Aktif
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="6" class="text-center text-muted">
+
+                Belum ada data histori jabatan.
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
