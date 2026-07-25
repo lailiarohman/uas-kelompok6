@@ -1,6 +1,8 @@
 from django import forms
 from .models import Buku, Anggota, Peminjaman, Pengembalian
 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class BukuForm(forms.ModelForm):
     class Meta:
@@ -92,3 +94,62 @@ class PengembalianForm(forms.ModelForm):
                 'class': 'form-control'
             }),
         }
+        
+class RegistrasiAnggotaForm(UserCreationForm):
+    nama = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    nim = forms.CharField(
+        max_length=20,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    prodi = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    fakultas = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    no_hp = forms.CharField(
+        max_length=20,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    alamat = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 3
+        })
+    )
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            'nama',
+            'nim',
+            'prodi',
+            'fakultas',
+            'no_hp',
+            'alamat',
+            'username',
+            'password1',
+            'password2'
+        ]

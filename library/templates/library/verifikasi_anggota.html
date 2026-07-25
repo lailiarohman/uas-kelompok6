@@ -1,0 +1,89 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Verifikasi Anggota{% endblock %}
+
+{% block content %}
+
+<h2>Verifikasi Anggota</h2>
+
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Prodi</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for a in anggota %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>{{ a.nama }}</td>
+
+                    <td>{{ a.nim }}</td>
+
+                    <td>{{ a.prodi }}</td>
+
+                    <td>
+
+                        <span class="badge bg-warning">
+
+                            {{ a.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'setujui_anggota' a.id %}"
+                           class="btn btn-success btn-sm">
+
+                            Setujui
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="6" class="text-center">
+
+                        Tidak ada pendaftaran.
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

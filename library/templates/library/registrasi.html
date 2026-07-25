@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Registrasi Anggota</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="login-body">
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="text-center mb-4">
+
+            <i class="bi bi-person-plus-fill login-logo"></i>
+
+            <h2>Registrasi Anggota</h2>
+
+            <p>Silakan isi data di bawah ini</p>
+
+        </div>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success w-100">
+        Daftar
+    </button>
+
+</form>
+
+        <div class="text-center mt-3">
+
+            <a href="{% url 'login' %}">
+
+                Sudah punya akun? Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

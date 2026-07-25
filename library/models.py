@@ -30,6 +30,13 @@ class Buku(models.Model):
         return f"{self.kode_buku} - {self.judul}"
 
 class Anggota(models.Model):
+
+    STATUS = (
+        ('Menunggu', 'Menunggu'),
+        ('Disetujui', 'Disetujui'),
+        ('Ditolak', 'Ditolak'),
+    )
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -43,6 +50,12 @@ class Anggota(models.Model):
     fakultas = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=20)
     alamat = models.TextField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS,
+        default='Menunggu'
+    )
 
     def __str__(self):
         return f"{self.nama} ({self.nim})"
